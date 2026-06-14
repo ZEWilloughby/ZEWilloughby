@@ -25,6 +25,7 @@
   .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
   .card-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
   .card-value { font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-top: 0.2rem; }
+  .card-sub { font-size: 0.75rem; color: #94a3b8; margin-top: 0.15rem; }
 
   /* Alert */
   .alert { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #92400e; }
@@ -183,16 +184,19 @@
 
   <div class="cards">
     <div class="card">
-      <div class="card-label">Best price (total, 2 pax)</div>
+      <div class="card-label">Cheapest total (2 pax)</div>
       <div class="card-value">~€519</div>
+      <div class="card-sub">Option A · 40-min Riga connection risk</div>
     </div>
     <div class="card">
-      <div class="card-label">Best price per person</div>
-      <div class="card-value">~€260</div>
+      <div class="card-label">Cheapest safe total (2 pax)</div>
+      <div class="card-value">~€534</div>
+      <div class="card-sub">Option E · nonstop flight, no connection risk</div>
     </div>
     <div class="card">
-      <div class="card-label">Ferry (Sthlm → MHQ)</div>
-      <div class="card-value">€36–38 / 2 pax</div>
+      <div class="card-label">Cheapest per person</div>
+      <div class="card-value">~€260 / ~€267</div>
+      <div class="card-sub">A (risky) / E (safe)</div>
     </div>
     <div class="card">
       <div class="card-label">Deadline</div>
@@ -201,7 +205,7 @@
   </div>
 
   <div class="alert">
-    ⚠️ <strong>No trains to Iceland.</strong> All options are flight + ferry. · SAS &amp; Finnair afternoon flights on 3 Aug (arriving ARN 15:55–16:25) <strong>miss the 16:00 Stockholm ferry</strong> and have no viable same-day connection — avoid for this trip. · Viking Line Stockholm → Mariehamn sails at <strong>07:45 (arrives 14:10)</strong> and <strong>16:00 (arrives 22:50)</strong>.
+    ⚠️ <strong>No trains to Iceland.</strong> All options are flight + ferry. · SAS &amp; Finnair afternoon flights on 3 Aug (arriving ARN 15:55–16:25) <strong>miss the 16:00 Stockholm ferry</strong> — avoid for the Stockholm route. · <strong>Icelandair does NOT fly KEF→ARN</strong> (confirmed). Icelandair does fly KEF→HEL nonstop. · Viking Line HEL departure (18:10) is only reachable with a morning flight; the evening Finnair flight lands at 23:40 — use the Turku routing instead (Option E).
   </div>
 
   <!-- COMPARISON TABLE -->
@@ -214,52 +218,71 @@
         <th>Mode(s)</th>
         <th>Depart</th>
         <th>Arrive MHQ</th>
-        <th>Duration</th>
         <th>Price (2 pax)</th>
         <th>Per person</th>
-        <th>Carbon</th>
-        <th>Book / Info</th>
+        <th>Notes</th>
+        <th>Book</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="recommended">
-        <td><span class="star">⭐</span><strong>A – Budget</strong></td>
+      <tr>
+        <td><strong>A – Budget</strong></td>
         <td>KEF→RIX→ARN + Sthlm→MHQ</td>
-        <td>✈️ Air Baltic + ⛴ Gabriella<br><span class="badge badge-red" style="margin-top:4px;display:inline-block">⚠️ 40 min RIX connection</span></td>
-        <td>00:45 Sun 3 Aug<br><span style="color:#94a3b8;font-size:0.75rem">(night of 2 Aug)</span></td>
+        <td>✈️ Air Baltic + ⛴<br><span class="badge badge-red" style="margin-top:4px;display:inline-block">⚠️ 40 min RIX</span></td>
+        <td>00:45 Sun 3 Aug</td>
         <td>22:50 Sun 3 Aug ✅</td>
-        <td>~22h total<br><span style="color:#94a3b8;font-size:0.75rem">incl. 8h Stockholm wait</span></td>
-        <td><strong>~€519–531</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €431+bags~€50 + ferry €38</span></td>
+        <td><strong>~€519–531</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €431 + bags ~€50 + ferry €38</span></td>
         <td><strong>~€260–266</strong></td>
-        <td><span class="badge badge-amber">+27% CO₂</span></td>
+        <td><span class="badge badge-red">Connection risk</span> Zero buffer at Riga. Miss = blow deadline.</td>
         <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAzagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
         <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+      </tr>
+      <tr class="recommended">
+        <td><span class="star">⭐</span><strong>E – Best Value</strong></td>
+        <td>KEF→HEL nonstop + bus + TKU→MHQ</td>
+        <td>✈️ Finnair nonstop + 🚌 night bus + ⛴ Viking Glory</td>
+        <td>17:15 Sun 2 Aug</td>
+        <td>14:10 Mon 3 Aug ✅</td>
+        <td><strong>~€534–540</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €421 + bus ~€28 + hotel ~€50 + ferry €38</span></td>
+        <td><strong>~€267–270</strong></td>
+        <td><span class="badge badge-green">Nonstop ✓</span> No connection risk. Operationally complex (midnight bus, brief Turku stay).</td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDSEVMQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
+        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/turku-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
       </tr>
       <tr>
         <td><strong>B – Comfortable</strong></td>
         <td>KEF→OSL→ARN + hotel + Sthlm→MHQ</td>
-        <td>✈️ SAS + 🏨 hotel + ⛴ Viking Grace</td>
+        <td>✈️ SAS + 🏨 + ⛴ Viking Grace</td>
         <td>10:30 Sat 2 Aug</td>
         <td>14:10 Sun 3 Aug ✅</td>
-        <td>~28h total<br><span style="color:#94a3b8;font-size:0.75rem">incl. overnight Stockholm</span></td>
         <td><strong>~€716–736</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight ~€580 + hotel ~€100 + ferry €36</span></td>
         <td><strong>~€358–368</strong></td>
-        <td><span class="badge badge-green">–10% CO₂</span></td>
+        <td><span class="badge badge-green">55 min OSL buffer ✓</span> Overnight Stockholm. Comfortable.</td>
         <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
         <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
       </tr>
       <tr>
+        <td><strong>D – Via Helsinki</strong></td>
+        <td>KEF→HEL nonstop + night ferry HEL→MHQ</td>
+        <td>✈️ Finnair nonstop + ⛴ Viking Line night ferry</td>
+        <td>08:35 Sat 2 Aug</td>
+        <td>04:25 Sun 3 Aug ✅</td>
+        <td><strong>~€720</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €603 + ferry €117</span></td>
+        <td><strong>~€360</strong></td>
+        <td><span class="badge badge-green">Nonstop ✓</span> No hotel needed. Ferry arrives pre-dawn Aug 3.</td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDSEVMQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
+        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/helsinki-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+      </tr>
+      <tr>
         <td><strong>C – Mid</strong></td>
-        <td>KEF→HEL→ARN + Sthlm→MHQ</td>
+        <td>KEF→HEL→ARN + hotel + Sthlm→MHQ</td>
         <td>✈️ Finnair + ⛴ Viking Grace</td>
         <td>08:35 Sat 2 Aug</td>
-        <td>14:10 Sun 3 Aug ✅<br><span style="color:#94a3b8;font-size:0.75rem">overnight Stockholm</span></td>
-        <td>~30h total</td>
-        <td><strong>~€749+</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €749 + hotel ~€100 + ferry €36</span></td>
+        <td>14:10 Sun 3 Aug ✅</td>
+        <td><strong>~€885+</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €749 + hotel ~€100 + ferry €36</span></td>
         <td><strong>~€443+</strong></td>
-        <td><span class="badge badge-amber">+10% CO₂</span></td>
-        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
-        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+        <td>Extra layover in Helsinki vs. Option D for same flight price. Less competitive.</td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a></td>
       </tr>
       <tr>
         <td><strong>❌ SAS 3 Aug</strong></td>
@@ -267,25 +290,24 @@
         <td>✈️ SAS only</td>
         <td>09:10 Sun 3 Aug</td>
         <td>—</td>
-        <td>—</td>
         <td>€556/2 + ???</td>
         <td>—</td>
-        <td>—</td>
         <td><span class="badge badge-red">Misses 16:00 ferry — no viable same-day connection before 4 Aug</span></td>
+        <td>—</td>
       </tr>
     </tbody>
   </table>
 
-  <p class="note">All flight prices are for 2 adults, economy, include taxes &amp; fees. Air Baltic <strong>does not include checked bags</strong> — add ~€25–30 per bag when booking. SAS 1st checked bag is €0–30/pp. Viking Line prices are for 2 adults, deck class (no cabin).</p>
+  <p class="note">All flight prices are for 2 adults, economy, include taxes &amp; fees. Air Baltic <strong>does not include checked bags</strong> — add ~€25–30 per bag. SAS 1st checked bag €0–30/pp. Viking Line prices are for 2 adults, deck class (no cabin).</p>
 
   <!-- JOURNEY BREAKDOWNS -->
   <h2>Journey details</h2>
   <div class="journeys">
 
     <!-- OPTION A -->
-    <div class="journey recommended">
+    <div class="journey">
       <div class="journey-header">
-        <span class="star">⭐</span> Option A — Budget · ~€519–531 total · ~€260–266/pp
+        Option A — Budget · ~€519–531 total · ~€260–266/pp
       </div>
       <div class="journey-body">
         <div class="leg">
@@ -296,9 +318,9 @@
             <div class="connection-risk">
               <strong>⚠️ Tight connection at Riga (RIX) — 40 min layover</strong>
               <div class="risk-row"><strong>Airport MCT:</strong> Riga Airport's published Minimum Connection Time for Air Baltic (their hub carrier) international → international is <strong>40 minutes</strong> — this is the absolute floor, with zero buffer.</div>
-              <div class="risk-row"><strong>Carrier guarantee:</strong> Both legs are operated and sold by Air Baltic on a single booking, making this a <em>protected connection</em>. If the KEF→RIX leg is delayed and you miss the onward flight, Air Baltic is <strong>legally obligated to rebook you</strong> on the next available flight to Stockholm at no extra cost (EU Regulation 261/2004 also applies as KEF is an EU-adjacent departure).</div>
+              <div class="risk-row"><strong>Carrier guarantee:</strong> Both legs are operated and sold by Air Baltic on a single booking, making this a <em>protected connection</em>. If the KEF→RIX leg is delayed and you miss the onward flight, Air Baltic is <strong>legally obligated to rebook you</strong> on the next available flight to Stockholm at no extra cost (EU Regulation 261/2004 applies).</div>
               <div class="risk-row"><strong>The real risk:</strong> If you miss the connection, the next Air Baltic Stockholm flight is likely afternoon. You would <strong>miss the 16:00 Stockholm→Mariehamn ferry</strong>, and the next sailing wouldn't reach Mariehamn until 22:50 on 4 Aug — one day past your deadline.</div>
-              <div class="risk-row"><strong>Checked bags:</strong> Even if Air Baltic rebooks you onto a later flight, your checked bags may travel on a different flight and arrive separately. Bag-claim at ARN adds further time risk against the 16:00 ferry.</div>
+              <div class="risk-row"><strong>Checked bags:</strong> Even if Air Baltic rebooks you onto a later flight, your checked bags may travel separately and arrive after you. Bag claim at ARN adds further time risk against the 16:00 ferry.</div>
             </div>
           </div>
           <div class="leg-price">€431/2<br><span style="font-size:0.72rem;font-weight:400;color:#64748b">+~€50 bags</span></div>
@@ -323,6 +345,55 @@
       <div class="journey-total">
         <span>Total for 2 passengers</span>
         <span>~€519–531 &nbsp;|&nbsp; ~€260–266 pp</span>
+      </div>
+    </div>
+
+    <!-- OPTION E -->
+    <div class="journey recommended">
+      <div class="journey-header">
+        <span class="star">⭐</span> Option E — Best Value (safe) · ~€534–540 total · ~€267–270/pp
+      </div>
+      <div class="journey-body">
+        <div class="leg">
+          <div class="leg-icon">✈️</div>
+          <div class="leg-detail">
+            <div class="leg-route">Finnair · KEF → HEL (nonstop)</div>
+            <div class="leg-meta">Sun 2 Aug · 17:15 → 23:40 · 5h 25m · No layover · Bags included</div>
+            <div class="connection-ok">
+              <strong>✅ Nonstop flight — no connection risk whatsoever</strong>
+              <div class="risk-row">Single-leg flight directly into Helsinki Vantaa. Nothing to miss. Checked bags go straight through to final destination airport.</div>
+            </div>
+          </div>
+          <div class="leg-price">€421/2</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">🚌</div>
+          <div class="leg-detail">
+            <div class="leg-route">Night bus · Helsinki → Turku</div>
+            <div class="leg-meta">~00:30 Mon 3 Aug · ~2h · Onnibus or Matkahuolto from Helsinki Airport or city bus station · Arrives Turku ~02:30</div>
+          </div>
+          <div class="leg-price">~€28/2</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">🏨</div>
+          <div class="leg-detail">
+            <div class="leg-route">Brief overnight · Turku</div>
+            <div class="leg-meta">~02:30–08:00 · Budget hotel or hostel near Turku harbour · Check out early for 08:45 ferry</div>
+          </div>
+          <div class="leg-price">~€50/2</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">⛴</div>
+          <div class="leg-detail">
+            <div class="leg-route">Viking Line Viking Glory · Turku → Mariehamn (Port)</div>
+            <div class="leg-meta">Mon 3 Aug · 08:45 → 14:10 · 5h 25m · Arrives at Port of Mariehamn (city centre)</div>
+          </div>
+          <div class="leg-price">~€38/2</div>
+        </div>
+      </div>
+      <div class="journey-total">
+        <span>Total for 2 passengers</span>
+        <span>~€534–540 &nbsp;|&nbsp; ~€267–270 pp</span>
       </div>
     </div>
 
@@ -369,38 +440,104 @@
       </div>
     </div>
 
+    <!-- OPTION D -->
+    <div class="journey">
+      <div class="journey-header">
+        Option D — Via Helsinki (nonstop, cleanest) · ~€720 total · ~€360/pp
+      </div>
+      <div class="journey-body">
+        <div class="leg">
+          <div class="leg-icon">✈️</div>
+          <div class="leg-detail">
+            <div class="leg-route">Finnair · KEF → HEL (nonstop)</div>
+            <div class="leg-meta">Sat 2 Aug · 08:35 → 15:00 · 5h 25m · No layover · Bags included · Arrives Helsinki Vantaa</div>
+            <div class="connection-ok">
+              <strong>✅ Nonstop flight — no connection risk</strong>
+              <div class="risk-row">Land at 15:00. Helsinki Vantaa to Länsiterminaali (West Harbour) is ~40 min by bus (Bus 55 or airport taxi). Ferry check-in is typically 30–60 min before departure. Plenty of time.</div>
+            </div>
+          </div>
+          <div class="leg-price">€603/2</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">⛴</div>
+          <div class="leg-detail">
+            <div class="leg-route">Viking Line · Helsinki → Mariehamn (night ferry)</div>
+            <div class="leg-meta">Sat 2 Aug · 18:10 depart · Sun 3 Aug 04:25 arrive · ~10h 15m · Deck class, no cabin</div>
+          </div>
+          <div class="leg-price">€117/2</div>
+        </div>
+      </div>
+      <div class="journey-total">
+        <span>Total for 2 passengers</span>
+        <span>~€720 &nbsp;|&nbsp; ~€360 pp</span>
+      </div>
+    </div>
+
   </div>
 
   <!-- FERRY TIMETABLE NOTE -->
-  <h2>Viking Line Stockholm → Mariehamn timetable (valid to 31 Dec 2027)</h2>
+  <h2>Ferry timetables (Viking Line, Aug 2026)</h2>
   <table>
     <thead>
       <tr>
+        <th>Route</th>
         <th>Vessel</th>
-        <th>Depart Stockholm</th>
-        <th>Arrive Mariehamn</th>
+        <th>Depart</th>
+        <th>Arrive</th>
         <th>Duration</th>
-        <th>Price (2 adults, deck class)</th>
+        <th>Arrives at</th>
+        <th>Price (2 adults, deck)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td>Stockholm → Mariehamn</td>
         <td>Viking Grace</td>
         <td>07:45</td>
         <td>14:10</td>
         <td>6h 25m</td>
+        <td>Port of Mariehamn ✓</td>
         <td>€36.00</td>
       </tr>
       <tr>
+        <td>Stockholm → Mariehamn</td>
         <td>Gabriella</td>
         <td>16:00</td>
         <td>22:50</td>
         <td>6h 50m</td>
+        <td>Port of Mariehamn ✓</td>
         <td>€38.00</td>
+      </tr>
+      <tr>
+        <td>Turku → Mariehamn</td>
+        <td>Viking Glory</td>
+        <td>08:45</td>
+        <td>14:10</td>
+        <td>5h 25m</td>
+        <td>Port of Mariehamn ✓</td>
+        <td>~€38 (Aug 2)</td>
+      </tr>
+      <tr>
+        <td>Turku → Långnäs ⚠️</td>
+        <td>Viking Grace</td>
+        <td>20:55</td>
+        <td>01:05+1</td>
+        <td>4h 10m</td>
+        <td>Långnäs (28km from Mariehamn, needs taxi)</td>
+        <td>~€30 (Aug 2)</td>
+      </tr>
+      <tr>
+        <td>Helsinki → Mariehamn</td>
+        <td>Viking Line</td>
+        <td>18:10</td>
+        <td>04:25+1</td>
+        <td>~10h 15m</td>
+        <td>Port of Mariehamn ✓</td>
+        <td>€117 (Aug 2, 2 pax)</td>
       </tr>
     </tbody>
   </table>
-  <p class="note">Prices from Viking Line live booking system, August 2026. No cabin included. <a href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank">vikingline.com</a></p>
+  <p class="note">⚠️ <strong>Turku night sailing goes to Långnäs</strong>, not Mariehamn port — 28km away, requires a taxi (~€35–40). Always use the morning sailing from Turku for arrival at the port. · Prices from Viking Line live booking system, August 2026. <a href="https://www.vikingline.com" target="_blank">vikingline.com</a></p>
 
   <!-- WHATSAPP SUMMARY -->
   <div class="wa-section">
@@ -409,33 +546,42 @@
     <pre class="wa">✈️⛴ *REYKJAVIK → MARIEHAMN — AUG 2026*
 _2 passengers, checked bag, arrive before 4 Aug. Prices per person._
 
-⭐ *OPTION A — CHEAPEST (but connection risk)*
+⭐ *OPTION E — BEST VALUE, NO CONNECTION RISK*
+- Finnair KEF→HEL nonstop (Sun 2 Aug 17:15→23:40) · €421/2
+- Night bus Helsinki→Turku ~00:30 · ~2h · €28/2 (Onnibus/Matkahuolto)
+- Brief overnight Turku ~€50/2
+- Viking Glory ferry: Turku 08:45 → Mariehamn 14:10 Mon 3 Aug · ~€38/2
+- Total: *~€267 pp*
+- ✅ Nonstop flight, no layover, no connection to miss
+- ⚠️ Operationally complex: midnight bus + brief Turku overnight
+
+*OPTION A — CHEAPEST (connection risk)*
 - Air Baltic KEF→RIX→ARN (via Riga)
 - Departs: 00:45 Sun 3 Aug (late night)
 - Riga layover: 40 min ⚠️ TIGHT
   - RIX minimum connection time: 40 min (zero buffer)
   - Protected connection (Air Baltic sells both legs) — they must rebook if missed
   - But if rebooked: next Stockholm flight likely afternoon → miss 16:00 ferry → arrive 4 Aug (deadline blown)
-  - Checked bags may also arrive separately if rebooked
-- Arrives Stockholm: 08:10 Sun 3 Aug (if connection made)
-- 🚶 ~7h wait in Stockholm
-- Viking Line Gabriella: Stockholm 16:00 → Mariehamn 22:50
+  - Bags may also arrive separately if rebooked
+- Arrives Stockholm: 08:10, wait ~7h
+- Viking Line Gabriella: Stockholm 16:00 → Mariehamn 22:50 Sun 3 Aug
 - Total: *~€260 pp* _(+ ~€25–30/bag, not included in Air Baltic fare)_
-- Book flight: https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAzagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR
-- Book ferry: https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/
 
-*OPTION B — COMFORTABLE (safe, more €)*
-- SAS KEF→OSL→ARN (via Oslo)
-- Departs: 10:30 Sat 2 Aug
-- Oslo layover: 1h 35 min ✅ Comfortable (MCT is 40 min, ~55 min buffer)
-- Arrives Stockholm: 18:20 Sat 2 Aug
-- 🏨 Overnight Stockholm (~€50 pp)
-- Viking Line Viking Grace: Stockholm 07:45 → Mariehamn 14:10 Sun 3 Aug
-- Total: *~€360 pp* _(bags mostly included with SAS)_
+*OPTION D — VIA HELSINKI (nonstop, cleanest)*
+- Finnair KEF→HEL nonstop (Sat 2 Aug 08:35→15:00) · €603/2
+- ~40 min bus from Vantaa airport to Helsinki West Harbour
+- Viking Line night ferry: Helsinki 18:10 → Mariehamn 04:25 Sun 3 Aug · €117/2
+- Total: *~€360 pp*
+- ✅ Nonstop flight, no hotel, arrive early morning Aug 3
 
-⚠️ _SAS/Finnair flights arriving ARN after 15:00 on 3 Aug miss the 16:00 ferry and can't reach Mariehamn before 4 Aug._
-⚠️ _No trains — Iceland is an island. Always flight + ferry._
-⚠️ _Icelandair does NOT fly KEF→ARN — confirmed no route exists._</pre>
+*OPTION B — COMFORTABLE (via Stockholm)*
+- SAS KEF→OSL→ARN (Sat 2 Aug 10:30→18:20, Oslo 1h 35 min layover ✅)
+- Overnight Stockholm (~€50 pp)
+- Viking Grace: Stockholm 07:45 → Mariehamn 14:10 Sun 3 Aug
+- Total: *~€360 pp*
+
+⚠️ _Icelandair does NOT fly KEF→ARN (confirmed). No trains — Iceland is an island._
+⚠️ _Turku night ferry goes to Långnäs (28km away), not Mariehamn port — use morning sailing._</pre>
   </div>
 
   <footer>
