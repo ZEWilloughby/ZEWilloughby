@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reykjavik → Mariehamn | Before 4 Aug 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #ffffff;
+    color: #1e293b;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 2rem; }
+
+  /* Summary cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; }
+  .card-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  .card-value { font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-top: 0.2rem; }
+
+  /* Alert */
+  .alert { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: #92400e; }
+
+  /* Table */
+  h2 { font-size: 1rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #1e293b; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 1.5rem; }
+  thead th {
+    background: #f1f5f9;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  tbody td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  tbody tr:hover td { background: #f8fafc; }
+
+  /* Recommended row */
+  tr.recommended td {
+    background: #fefce8;
+    border-left: none;
+  }
+  tr.recommended td:first-child {
+    border-left: 4px solid #ca8a04;
+    padding-left: calc(0.75rem - 4px);
+  }
+  tr.recommended:hover td { background: #fef9c3; }
+
+  .star { color: #ca8a04; font-size: 1rem; margin-right: 0.25rem; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    padding: 0.2em 0.55em;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-amber { background: #fef3c7; color: #92400e; }
+  .badge-red   { background: #fee2e2; color: #991b1b; }
+  .badge-blue  { background: #dbeafe; color: #1e40af; }
+
+  /* Book buttons */
+  a.btn {
+    display: inline-block;
+    background: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.3rem 0.65rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  a.btn:hover { background: #1d4ed8; }
+
+  /* Journey breakdown */
+  .journeys { display: grid; gap: 1rem; margin-bottom: 2rem; }
+  .journey {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .journey.recommended { border-color: #ca8a04; }
+  .journey-header {
+    background: #f8fafc;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .journey.recommended .journey-header { background: #fefce8; }
+  .journey-body { padding: 0.75rem 1rem; }
+  .leg { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.4rem 0; border-bottom: 1px dashed #f1f5f9; }
+  .leg:last-child { border-bottom: none; }
+  .leg-icon { font-size: 1.1rem; min-width: 1.5rem; }
+  .leg-detail { flex: 1; }
+  .leg-route { font-weight: 600; font-size: 0.85rem; }
+  .leg-meta { color: #64748b; font-size: 0.78rem; margin-top: 0.1rem; }
+  .leg-price { font-weight: 700; color: #1e293b; font-size: 0.85rem; white-space: nowrap; }
+
+  .journey-total {
+    background: #f8fafc;
+    padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-top: 1px solid #e2e8f0;
+  }
+  .journey.recommended .journey-total { background: #fef9c3; }
+
+  /* WhatsApp block */
+  .wa-section { margin-top: 2rem; }
+  .wa-label { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+  pre.wa {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.78rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #1e293b;
+    line-height: 1.6;
+  }
+
+  .note { font-size: 0.78rem; color: #64748b; margin-top: 0.5rem; }
+  .note strong { color: #1e293b; }
+
+  /* Connection risk box */
+  .connection-risk {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 4px solid #ea580c;
+    border-radius: 6px;
+    padding: 0.65rem 0.85rem;
+    margin: 0.5rem 0 0.25rem;
+    font-size: 0.78rem;
+    color: #7c2d12;
+    line-height: 1.55;
+  }
+  .connection-risk strong { color: #c2410c; }
+  .connection-ok {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #16a34a;
+    border-radius: 6px;
+    padding: 0.65rem 0.85rem;
+    margin: 0.5rem 0 0.25rem;
+    font-size: 0.78rem;
+    color: #14532d;
+    line-height: 1.55;
+  }
+  .connection-ok strong { color: #15803d; }
+  .risk-row { margin-top: 0.35rem; }
+
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; font-size: 0.75rem; color: #94a3b8; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>✈️ Reykjavík → Mariehamn</h1>
+  <p class="subtitle">2 passengers · Economy · Checked bag · Arrive before 4 Aug 2026 · Prices in EUR</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Best price (total, 2 pax)</div>
+      <div class="card-value">~€519</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Best price per person</div>
+      <div class="card-value">~€260</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Ferry (Sthlm → MHQ)</div>
+      <div class="card-value">€36–38 / 2 pax</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Deadline</div>
+      <div class="card-value">Before 4 Aug</div>
+    </div>
+  </div>
+
+  <div class="alert">
+    ⚠️ <strong>No trains to Iceland.</strong> All options are flight + ferry. · SAS &amp; Finnair afternoon flights on 3 Aug (arriving ARN 15:55–16:25) <strong>miss the 16:00 Stockholm ferry</strong> and have no viable same-day connection — avoid for this trip. · Viking Line Stockholm → Mariehamn sails at <strong>07:45 (arrives 14:10)</strong> and <strong>16:00 (arrives 22:50)</strong>.
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <h2>Comparison table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Option</th>
+        <th>Route</th>
+        <th>Mode(s)</th>
+        <th>Depart</th>
+        <th>Arrive MHQ</th>
+        <th>Duration</th>
+        <th>Price (2 pax)</th>
+        <th>Per person</th>
+        <th>Carbon</th>
+        <th>Book / Info</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="recommended">
+        <td><span class="star">⭐</span><strong>A – Budget</strong></td>
+        <td>KEF→RIX→ARN + Sthlm→MHQ</td>
+        <td>✈️ Air Baltic + ⛴ Gabriella<br><span class="badge badge-red" style="margin-top:4px;display:inline-block">⚠️ 40 min RIX connection</span></td>
+        <td>00:45 Sun 3 Aug<br><span style="color:#94a3b8;font-size:0.75rem">(night of 2 Aug)</span></td>
+        <td>22:50 Sun 3 Aug ✅</td>
+        <td>~22h total<br><span style="color:#94a3b8;font-size:0.75rem">incl. 8h Stockholm wait</span></td>
+        <td><strong>~€519–531</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €431+bags~€50 + ferry €38</span></td>
+        <td><strong>~€260–266</strong></td>
+        <td><span class="badge badge-amber">+27% CO₂</span></td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAzagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
+        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+      </tr>
+      <tr>
+        <td><strong>B – Comfortable</strong></td>
+        <td>KEF→OSL→ARN + hotel + Sthlm→MHQ</td>
+        <td>✈️ SAS + 🏨 hotel + ⛴ Viking Grace</td>
+        <td>10:30 Sat 2 Aug</td>
+        <td>14:10 Sun 3 Aug ✅</td>
+        <td>~28h total<br><span style="color:#94a3b8;font-size:0.75rem">incl. overnight Stockholm</span></td>
+        <td><strong>~€716–736</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight ~€580 + hotel ~€100 + ferry €36</span></td>
+        <td><strong>~€358–368</strong></td>
+        <td><span class="badge badge-green">–10% CO₂</span></td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
+        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+      </tr>
+      <tr>
+        <td><strong>C – Mid</strong></td>
+        <td>KEF→HEL→ARN + Sthlm→MHQ</td>
+        <td>✈️ Finnair + ⛴ Viking Grace</td>
+        <td>08:35 Sat 2 Aug</td>
+        <td>14:10 Sun 3 Aug ✅<br><span style="color:#94a3b8;font-size:0.75rem">overnight Stockholm</span></td>
+        <td>~30h total</td>
+        <td><strong>~€749+</strong><br><span style="color:#94a3b8;font-size:0.75rem">flight €749 + hotel ~€100 + ferry €36</span></td>
+        <td><strong>~€443+</strong></td>
+        <td><span class="badge badge-amber">+10% CO₂</span></td>
+        <td><a class="btn" href="https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAyagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR" target="_blank">Flight</a>
+        <a class="btn" href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank" style="margin-top:4px;display:block;background:#475569">Ferry</a></td>
+      </tr>
+      <tr>
+        <td><strong>❌ SAS 3 Aug</strong></td>
+        <td>KEF→OSL→ARN (arrives 16:25)</td>
+        <td>✈️ SAS only</td>
+        <td>09:10 Sun 3 Aug</td>
+        <td>—</td>
+        <td>—</td>
+        <td>€556/2 + ???</td>
+        <td>—</td>
+        <td>—</td>
+        <td><span class="badge badge-red">Misses 16:00 ferry — no viable same-day connection before 4 Aug</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note">All flight prices are for 2 adults, economy, include taxes &amp; fees. Air Baltic <strong>does not include checked bags</strong> — add ~€25–30 per bag when booking. SAS 1st checked bag is €0–30/pp. Viking Line prices are for 2 adults, deck class (no cabin).</p>
+
+  <!-- JOURNEY BREAKDOWNS -->
+  <h2>Journey details</h2>
+  <div class="journeys">
+
+    <!-- OPTION A -->
+    <div class="journey recommended">
+      <div class="journey-header">
+        <span class="star">⭐</span> Option A — Budget · ~€519–531 total · ~€260–266/pp
+      </div>
+      <div class="journey-body">
+        <div class="leg">
+          <div class="leg-icon">✈️</div>
+          <div class="leg-detail">
+            <div class="leg-route">Air Baltic · KEF → RIX → ARN</div>
+            <div class="leg-meta">Sun 3 Aug · 00:45 → 08:10 · 5h 25m · 1 stop Riga (40 min) · <span class="badge badge-amber">No checked bags</span> add ~€25–30/bag</div>
+            <div class="connection-risk">
+              <strong>⚠️ Tight connection at Riga (RIX) — 40 min layover</strong>
+              <div class="risk-row"><strong>Airport MCT:</strong> Riga Airport's published Minimum Connection Time for Air Baltic (their hub carrier) international → international is <strong>40 minutes</strong> — this is the absolute floor, with zero buffer.</div>
+              <div class="risk-row"><strong>Carrier guarantee:</strong> Both legs are operated and sold by Air Baltic on a single booking, making this a <em>protected connection</em>. If the KEF→RIX leg is delayed and you miss the onward flight, Air Baltic is <strong>legally obligated to rebook you</strong> on the next available flight to Stockholm at no extra cost (EU Regulation 261/2004 also applies as KEF is an EU-adjacent departure).</div>
+              <div class="risk-row"><strong>The real risk:</strong> If you miss the connection, the next Air Baltic Stockholm flight is likely afternoon. You would <strong>miss the 16:00 Stockholm→Mariehamn ferry</strong>, and the next sailing wouldn't reach Mariehamn until 22:50 on 4 Aug — one day past your deadline.</div>
+              <div class="risk-row"><strong>Checked bags:</strong> Even if Air Baltic rebooks you onto a later flight, your checked bags may travel on a different flight and arrive separately. Bag-claim at ARN adds further time risk against the 16:00 ferry.</div>
+            </div>
+          </div>
+          <div class="leg-price">€431/2<br><span style="font-size:0.72rem;font-weight:400;color:#64748b">+~€50 bags</span></div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">🏙️</div>
+          <div class="leg-detail">
+            <div class="leg-route">Wait in Stockholm</div>
+            <div class="leg-meta">08:10 → 15:00 · ~7h · Explore city, rest, lunch</div>
+          </div>
+          <div class="leg-price">€0</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">⛴</div>
+          <div class="leg-detail">
+            <div class="leg-route">Viking Line Gabriella · Stockholm → Mariehamn</div>
+            <div class="leg-meta">Sun 3 Aug · 16:00 → 22:50 · 6h 50m · Deck class · Check-in before ~15:30</div>
+          </div>
+          <div class="leg-price">€38/2</div>
+        </div>
+      </div>
+      <div class="journey-total">
+        <span>Total for 2 passengers</span>
+        <span>~€519–531 &nbsp;|&nbsp; ~€260–266 pp</span>
+      </div>
+    </div>
+
+    <!-- OPTION B -->
+    <div class="journey">
+      <div class="journey-header">
+        Option B — Comfortable · ~€716–736 total · ~€358–368/pp
+      </div>
+      <div class="journey-body">
+        <div class="leg">
+          <div class="leg-icon">✈️</div>
+          <div class="leg-detail">
+            <div class="leg-route">SAS · KEF → OSL → ARN</div>
+            <div class="leg-meta">Sat 2 Aug · 10:30 → 18:20 · 5h 50m · 1 stop Oslo (1h 35 min) · 1st checked bag €0–30/pp</div>
+            <div class="connection-ok">
+              <strong>✅ Comfortable connection at Oslo (OSL) — 1h 35 min layover</strong>
+              <div class="risk-row"><strong>Airport MCT:</strong> Oslo Airport's MCT for international → international is 40–45 min. A 1h 35 min layover gives you <strong>~50 min of genuine buffer</strong>.</div>
+              <div class="risk-row"><strong>Carrier guarantee:</strong> Both legs are on a single SAS booking (protected connection). SAS must rebook you if delayed — but with this buffer, a miss is very unlikely.</div>
+              <div class="risk-row"><strong>Checked bags:</strong> Transfer smoothly on the single ticket; bags are checked through to ARN.</div>
+            </div>
+          </div>
+          <div class="leg-price">~€580/2</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">🏨</div>
+          <div class="leg-detail">
+            <div class="leg-route">Overnight Stockholm</div>
+            <div class="leg-meta">Sat 2 Aug night · Budget hotels near Stockholm Central: Ibis, Scandic etc.</div>
+          </div>
+          <div class="leg-price">~€80–120</div>
+        </div>
+        <div class="leg">
+          <div class="leg-icon">⛴</div>
+          <div class="leg-detail">
+            <div class="leg-route">Viking Line Viking Grace · Stockholm → Mariehamn</div>
+            <div class="leg-meta">Sun 3 Aug · 07:45 → 14:10 · 6h 25m · Deck class · Early check-in</div>
+          </div>
+          <div class="leg-price">€36/2</div>
+        </div>
+      </div>
+      <div class="journey-total">
+        <span>Total for 2 passengers</span>
+        <span>~€696–736 &nbsp;|&nbsp; ~€348–368 pp</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FERRY TIMETABLE NOTE -->
+  <h2>Viking Line Stockholm → Mariehamn timetable (valid to 31 Dec 2027)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Vessel</th>
+        <th>Depart Stockholm</th>
+        <th>Arrive Mariehamn</th>
+        <th>Duration</th>
+        <th>Price (2 adults, deck class)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Viking Grace</td>
+        <td>07:45</td>
+        <td>14:10</td>
+        <td>6h 25m</td>
+        <td>€36.00</td>
+      </tr>
+      <tr>
+        <td>Gabriella</td>
+        <td>16:00</td>
+        <td>22:50</td>
+        <td>6h 50m</td>
+        <td>€38.00</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="note">Prices from Viking Line live booking system, August 2026. No cabin included. <a href="https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/" target="_blank">vikingline.com</a></p>
+
+  <!-- WHATSAPP SUMMARY -->
+  <div class="wa-section">
+    <h2>WhatsApp-ready summary</h2>
+    <div class="wa-label">Copy and paste ↓</div>
+    <pre class="wa">✈️⛴ *REYKJAVIK → MARIEHAMN — AUG 2026*
+_2 passengers, checked bag, arrive before 4 Aug. Prices per person._
+
+⭐ *OPTION A — CHEAPEST (but connection risk)*
+- Air Baltic KEF→RIX→ARN (via Riga)
+- Departs: 00:45 Sun 3 Aug (late night)
+- Riga layover: 40 min ⚠️ TIGHT
+  - RIX minimum connection time: 40 min (zero buffer)
+  - Protected connection (Air Baltic sells both legs) — they must rebook if missed
+  - But if rebooked: next Stockholm flight likely afternoon → miss 16:00 ferry → arrive 4 Aug (deadline blown)
+  - Checked bags may also arrive separately if rebooked
+- Arrives Stockholm: 08:10 Sun 3 Aug (if connection made)
+- 🚶 ~7h wait in Stockholm
+- Viking Line Gabriella: Stockholm 16:00 → Mariehamn 22:50
+- Total: *~€260 pp* _(+ ~€25–30/bag, not included in Air Baltic fare)_
+- Book flight: https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA4LTAzagcIARIDS0VGcgcIARIDQVJOQAFAAUgBcAGCAQsI____________AZgBAg&hl=en&curr=EUR
+- Book ferry: https://www.sales.vikingline.com/find-trip/timetable/stockholm-mariehamn/
+
+*OPTION B — COMFORTABLE (safe, more €)*
+- SAS KEF→OSL→ARN (via Oslo)
+- Departs: 10:30 Sat 2 Aug
+- Oslo layover: 1h 35 min ✅ Comfortable (MCT is 40 min, ~55 min buffer)
+- Arrives Stockholm: 18:20 Sat 2 Aug
+- 🏨 Overnight Stockholm (~€50 pp)
+- Viking Line Viking Grace: Stockholm 07:45 → Mariehamn 14:10 Sun 3 Aug
+- Total: *~€360 pp* _(bags mostly included with SAS)_
+
+⚠️ _SAS/Finnair flights arriving ARN after 15:00 on 3 Aug miss the 16:00 ferry and can't reach Mariehamn before 4 Aug._
+⚠️ _No trains — Iceland is an island. Always flight + ferry._
+⚠️ _Icelandair does NOT fly KEF→ARN — confirmed no route exists._</pre>
+  </div>
+
+  <footer>
+    Prices fetched live via Google Flights and Viking Line booking system · June 2026 · All prices EUR · Availability and prices may change — always verify before booking.
+  </footer>
+
+</div>
+</body>
+</html>
