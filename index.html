@@ -1,6 +1,426 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Hello, world!</h1>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zander Willoughby</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #2e7d5e;
+    --accent-light: #e8f5f0;
+    --text: #1a1a2e;
+    --muted: #5a6a7a;
+    --border: #e8edf2;
+    --bg: #ffffff;
+    --bg-alt: #f8fafb;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  a { color: var(--accent); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-name { font-weight: 700; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 1.5rem;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, #1a5c42 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    color: white;
+    font-weight: 300;
+    letter-spacing: -1px;
+  }
+  .hero-text { flex: 1; }
+  .hero-name { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.4rem; }
+  .hero-title { font-size: 1rem; color: var(--muted); margin-bottom: 0.15rem; }
+  .hero-org a { color: var(--accent); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+  .hero-org a:hover { text-decoration: underline; }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: #fff8e1;
+    color: #8a6000;
+    border: 1px solid #ffe082;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    transition: all 0.15s;
+    background: white;
+  }
+  .hero-links a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 3rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  /* ── BIO ── */
+  .bio p { color: #2c3e50; font-size: 0.97rem; margin-bottom: 0.85rem; }
+  .bio p:last-child { margin-bottom: 0; }
+
+  /* ── TWO COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* Interests */
+  .interests { list-style: none; }
+  .interests li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+    color: #2c3e50;
+  }
+  .interests li::before { content: '◆'; color: var(--accent); font-size: 0.55rem; flex-shrink: 0; }
+
+  /* Education */
+  .edu-item { padding: 0.5rem 0; }
+  .edu-degree { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+  .edu-sub { font-size: 0.8rem; color: var(--accent); font-style: italic; margin-top: 0.1rem; }
+  .edu-place { font-size: 0.82rem; color: var(--muted); margin-top: 0.05rem; }
+  .edu-year {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 0.15em 0.55em;
+    border-radius: 4px;
+    font-weight: 600;
+    margin-top: 0.25rem;
+  }
+  .edu-divider { border: none; border-top: 1px dashed var(--border); margin: 0.75rem 0; }
+
+  /* ── PUBLICATIONS ── */
+  .pub-item { padding: 1.1rem 0; border-bottom: 1px solid var(--border); }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-authors { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .pub-authors strong { color: var(--text); }
+  .pub-title {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+  .pub-venue { font-size: 0.82rem; color: var(--muted); }
+  .pub-venue em { font-style: italic; }
+  .pub-abstract {
+    font-size: 0.82rem;
+    color: #4a5568;
+    margin-top: 0.5rem;
+    line-height: 1.55;
+    border-left: 3px solid var(--border);
+    padding-left: 0.75rem;
+  }
+  .pub-links { display: flex; gap: 0.4rem; margin-top: 0.65rem; flex-wrap: wrap; }
+  .pub-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2em 0.65em;
+    border-radius: 4px;
+    text-decoration: none;
+    background: var(--bg-alt);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+  .pub-tag:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem;
+    transition: all 0.15s;
+  }
+  .project-card:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(46,125,94,0.08); }
+  .project-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .project-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.3rem; color: var(--text); }
+  .project-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .project-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    margin-top: 0.6rem;
+  }
+
+  /* ── PAGES ── */
+  .pages-list { display: grid; gap: 0.6rem; }
+  .page-link {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.15s;
+  }
+  .page-link:hover { border-color: var(--accent); background: var(--accent-light); }
+  .page-link-icon { font-size: 1.2rem; min-width: 1.8rem; text-align: center; }
+  .page-link-title { font-weight: 600; font-size: 0.88rem; color: var(--text); }
+  .page-link-desc { font-size: 0.76rem; color: var(--muted); margin-top: 0.1rem; }
+  .page-link-arrow { margin-left: auto; color: #cbd5e1; font-size: 0.85rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 1.75rem;
+    font-size: 0.75rem;
+    color: #b0bec5;
+  }
+  footer a { color: #b0bec5; }
+
+  @media (max-width: 560px) {
+    .hero-inner { flex-direction: column; align-items: center; text-align: center; }
+    .hero-links { justify-content: center; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#">Zander Willoughby</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#pages">Pages</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="avatar">ZW</div>
+    <div class="hero-text">
+      <div class="hero-name">Zander Willoughby</div>
+      <div class="hero-title">Research Assistant</div>
+      <div class="hero-org"><a href="https://www.fredsinstitut.fi/" target="_blank">Ålands fredsinstitut</a></div>
+      <div><span class="hero-badge">🕊️ Rotary Peace Fellow</span></div>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/zanderewilloughby/" target="_blank">in LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=FXYaDGYAAAAJ&hl=en" target="_blank">🎓 Scholar</a>
+        <a href="https://orcid.org/0009-0005-7079-0620" target="_blank">🔬 ORCID</a>
+        <a href="https://github.com/ZEWilloughby" target="_blank">⌥ GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">Biography</div>
+    <div class="bio">
+      <p>I am a Research Assistant at <a href="https://www.fredsinstitut.fi/" target="_blank">Ålands fredsinstitut</a> in Mariehamn, where I support research on Åland's demilitarisation and neutralisation as well as education relating to territorial autonomy and the Åland example.</p>
+      <p>I completed my MSSc in Peace &amp; Conflict Studies at Uppsala University in 2025 as a Rotary Peace Fellow. My thesis examined gender inequality as a moderator of the relationship between climate change and communal violence in sub-Saharan Africa. Prior to my master's, I worked for nearly a decade in the peacebuilding sector in Washington, DC—most recently as Programs &amp; Networks Officer at Search for Common Ground, co-leading ConnexUs, a global knowledge-sharing platform serving 430,000+ users.</p>
+    </div>
+
+    <div class="two-col" style="margin-top:2rem">
+      <div>
+        <div class="section-title">Interests</div>
+        <ul class="interests">
+          <li>Demilitarisation &amp; neutrality</li>
+          <li>Autonomy &amp; self-determination</li>
+          <li>Unarmed civilian protection</li>
+          <li>Climate change &amp; communal violence</li>
+          <li>Gender &amp; conflict</li>
+          <li>Youth, peace &amp; security</li>
+          <li>Knowledge management &amp; peacebuilding</li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-title">Education</div>
+        <div class="edu-item">
+          <div class="edu-degree">MSSc Peace &amp; Conflict Studies</div>
+          <div class="edu-sub">Rotary Peace Fellowship</div>
+          <div class="edu-place">Uppsala University, Sweden</div>
+          <span class="edu-year">2025</span>
+        </div>
+        <hr class="edu-divider">
+        <div class="edu-item">
+          <div class="edu-degree">BA Political Science &amp; French, <em>cum laude</em></div>
+          <div class="edu-sub">Minor: Peace Studies</div>
+          <div class="edu-place">Manchester University, Indiana, USA</div>
+          <span class="edu-year">2018</span>
+        </div>
+        <hr class="edu-divider">
+        <div class="edu-item">
+          <div class="edu-degree">Sciences Po Strasbourg &amp; IIÉF</div>
+          <div class="edu-place">Strasbourg, France</div>
+          <span class="edu-year">2016–2017</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-title">Research &amp; Experience</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🏝️</div>
+        <div class="project-title">Åland Demilitarisation &amp; Security</div>
+        <div class="project-desc">Supporting research on Åland's demilitarisation and neutralisation, and education relating to territorial autonomy and the Åland example.</div>
+        <span class="project-tag">Ålands fredsinstitut · Current</span>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🌡️</div>
+        <div class="project-title">Climate Change &amp; Communal Violence</div>
+        <div class="project-desc">Quantitative subnational analysis of gender inequality as a moderator of climate-induced communal conflict in sub-Saharan Africa, using SPEI drought indices and SGDI data.</div>
+        <span class="project-tag">Master's thesis</span>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🛡️</div>
+        <div class="project-title">Unarmed Civilian Protection</div>
+        <div class="project-desc">UCP Fellowship with Nonviolent Peaceforce in Banda Aceh, Indonesia, focused on approaches to preventing violent extremism in Indonesia and Myanmar.</div>
+        <span class="project-tag">Nonviolent Peaceforce · 2024</span>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🌐</div>
+        <div class="project-title">ConnexUs Knowledge Platform</div>
+        <div class="project-desc">Co-led a global peacebuilding knowledge-sharing platform serving 430,000+ users across conflict-affected contexts at Search for Common Ground.</div>
+        <span class="project-tag">SFCG · 2022–2025</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-title">Publications</div>
+
+    <div class="pub-item">
+      <div class="pub-authors"><strong>Willoughby, Z.</strong> (2025)</div>
+      <div class="pub-title">Saving Strangers or Keeping Ourselves Safe? An Analysis of Peacekeeping &amp; Unarmed Civilian Protection</div>
+      <div class="pub-venue"><em>Pax et Bellum Journal</em>, 12. doi:10.33063/pbj.v12i2025.702</div>
+      <div class="pub-abstract">Examines the roles, strengths, and limitations of UN peacekeeping and unarmed civilian protection (UCP) as tools in conflict resolution. Using a case study in Bentiu, South Sudan, the paper reveals how UCP strategies—including Women's Protection Teams—address protection gaps left by peacekeepers, and argues for a nuanced integration of the two approaches centred on community agency and relational R2P.</div>
+      <div class="pub-links">
+        <a class="pub-tag" href="https://journals.uu.se/pax-et-bellum/article/view/702" target="_blank">Article</a>
+        <a class="pub-tag" href="https://doi.org/10.33063/pbj.v12i2025.702" target="_blank">DOI</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-authors"><strong>Willoughby, Z.</strong> (2025)</div>
+      <div class="pub-title">Boiling Points: Gender Inequality as a Moderator for Climate Change &amp; Communal Violence</div>
+      <div class="pub-venue">Master's thesis, Department of Peace and Conflict Research, Uppsala University. Supervised by Sebastian van Baalen.</div>
+      <div class="pub-abstract">Quantitative analysis of whether gender inequality moderates the relationship between climate variability and communal violence in sub-Saharan Africa, combining SPEI drought indices with subnational conflict and gender inequality datasets.</div>
+      <div class="pub-links">
+        <a class="pub-tag" href="https://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-558620" target="_blank">Full text</a>
+        <a class="pub-tag" href="https://orcid.org/0009-0005-7079-0620" target="_blank">ORCID</a>
+        <a class="pub-tag" href="https://scholar.google.com/citations?user=FXYaDGYAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGES -->
+  <section id="pages">
+    <div class="section-title">Pages &amp; Tools</div>
+    <div class="pages-list">
+      <div class="page-link">
+        <div class="page-link-icon">✈️</div>
+        <div>
+          <div class="page-link-title">Reykjavík → Mariehamn · Aug 2026</div>
+          <div class="page-link-desc">Flight and ferry options for 2 passengers arriving before 4 Aug</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Zander Willoughby &nbsp;·&nbsp; Mariehamn, Åland
+</footer>
+
+</body>
 </html>
